@@ -25,7 +25,7 @@ namespace ConsoleApp1
             }
             else
             {
-                char[] charsResult = new char[copies[0].Length];
+                char[] charsResult = new char[copies.Max().Length];
                 for (int i = 0; i < copies.Length; i++)
                 {
 
