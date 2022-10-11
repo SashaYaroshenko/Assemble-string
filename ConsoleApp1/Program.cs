@@ -10,7 +10,8 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            Kata.Assemble(new string[0]);
+            //Kata.Assemble(new string[0]);
+            Kata.Assemble(new string[] { "a*cde", "*bcde", "abc*e" });
         }
     }
 
@@ -18,14 +19,15 @@ namespace ConsoleApp1
     {
         public static string Assemble(string[] copies)
         {
-            
-            if (copies.Length==0)
+
+            if (copies.Length == 0)
             {
                 return "";
             }
             else
             {
-                char[] charsResult = new char[copies.Max().Length];
+                int len = copies.Max(x => x.Length);
+                char[] charsResult = new char[len];
                 for (int i = 0; i < copies.Length; i++)
                 {
 
@@ -46,9 +48,18 @@ namespace ConsoleApp1
                     }
 
                 }
+                for (int i = charsResult.Length - 1; i >= 0; i--)
+                {
+                    if (charsResult[i] == '*')
+                    {
+                        charsResult[i] = ' ';
+                        continue;
+                    }
+                    break;
+                }
                 return new string(charsResult);
             }
-            
+
         }
     }
 }
