@@ -10,7 +10,8 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            Kata.Assemble(new string[0]);
+            //Kata.Assemble(new string[0]);
+            Kata.Assemble(new string[] { "a*cde", "*bcde", "abc*e" });
         }
     }
 
@@ -18,37 +19,33 @@ namespace ConsoleApp1
     {
         public static string Assemble(string[] copies)
         {
-            
-            if (copies.Length==0)
+            if (copies.Length == 0)
             {
                 return "";
             }
             else
             {
-                char[] charsResult = new char[copies[0].Length];
-                for (int i = 0; i < copies.Length; i++)
-                {
+                int len = copies[0].Length; // I don't now why it`s right length
+                char[] charsResult = new char[len];
+                charsResult = charsResult.Select(x => x = '*').ToArray();
 
-                    for (int j = 0; j < copies[i].Length; j++)
+                for (int i = 0; i < len; i++)
+                {
+                    for (int j = 0; j < copies.Length; j++)
                     {
-                        if (copies[i][j] != '*' && charsResult[j] == 0)
+                        if (copies[j][i] != '*')
                         {
-                            charsResult[j] = (char)copies[i][j];
+                            charsResult[i] = copies[j][i];
+                            break;
                         }
-
                     }
+                    if (charsResult[i] == '*') charsResult[i] = '#';
                 }
-                for (int i = 0; i < charsResult.Length; i++)
-                {
-                    if (charsResult[i] == '*' || charsResult[i] == 0)
-                    {
-                        charsResult[i] = '#';
-                    }
 
-                }
                 return new string(charsResult);
             }
-            
         }
     }
+
 }
+
